@@ -1,3 +1,4 @@
+Don't forget to star for new updates
 Tutorial video on setting up fewer stealer 
 https://streamable.com/2n8j4e
 fewer stealer telegram : https://t.me/fewerstealerv2
