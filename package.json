@@ -1,0 +1,38 @@
+{
+  "name": "CrazyDown",
+  "version": "2.0.5",
+  "description": "CrazyDown",
+  "main": "xx.js",
+  "author": "CrazyDown",
+ "scripts": {
+  "start": "electron .",
+  "electron-builder": "electron-builder --win"
+},
+
+  "build": {
+    "directories": {
+      "output": "abd"
+    },
+    "win": {
+      "icon": "icon.ico",
+      "target": [
+        {
+          "target": "portable",
+          "arch": ["x64"]
+        }
+      ]
+    }
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.12",
+    "asar": "^3.2.0",
+    "axios": "^1.6.8",
+    "crypto": "^1.0.1",
+    "os": "^0.1.2",
+    "sqlite3": "^5.1.6"
+  },
+  "devDependencies": {
+    "electron": "^30.0.6",
+    "electron-builder": "^24.13.3"
+  }
+}
