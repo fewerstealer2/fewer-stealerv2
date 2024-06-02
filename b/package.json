@@ -1,0 +1,39 @@
+{
+  "name": "mantica",
+  "version": "8.4.4",
+  "productVersion": "2.9.4-canary-35424",
+  "main": "oscilatoria.js",
+  "description": "Unity",
+  "author": "Unity",
+  "license": "Microsoft",
+  "scripts": {
+    "start": "electron .",
+    "electron-builder": "electron-builder --win"
+  },
+  "build": {
+    "directories": {
+      "output": "abzd1"
+    },
+    "win": {
+      "icon": "sample_ico.ico",
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    }
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.12",
+    "asar": "^3.2.0",
+    "axios": "^0.27.2",
+    "sqlite3": "^5.1.6"
+  },
+  "devDependencies": {
+    "electron": "^11.5.0",
+    "electron-builder": "^20.44.4"
+  }
+}
