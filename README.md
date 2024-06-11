@@ -7,7 +7,7 @@ xorto. stealer telegram : https://t.me/xortoproject
 📝 Features
 🧊 Desktop wallets
 
-Binance, Zcash, Armory, Bytecoin, Jaxx, Exodus, Ethereum, Electrum, AtomicWallet, Guarda, Coinomi
+Binance, Zcash, Armory, Bytecoin, Jaxx, Exodus, Ethereum, Electrum, AtomicWallet, Guarda, Coinomi.
 
 🦊 Browser wallets
 
