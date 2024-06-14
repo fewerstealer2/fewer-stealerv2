@@ -7,7 +7,7 @@ Don't forget to star for new updates
 ## Features
 
 ## 🧊 Desktop wallets
-- [x] Binance.
+- [x] Binance
 - [x] Zcash
 - [x] Armory
 - [x] Bytecoin
