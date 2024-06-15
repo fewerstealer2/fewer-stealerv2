@@ -19,7 +19,7 @@ Don't forget to star for new updates
 - [x] Electrum
 - [x] AtomicWallet
 - [x] Guarda
-- [x] Coinomi
+- [x] Coinomi.
 
 ## 🦊 Browser wallets
 - [x] Trust
