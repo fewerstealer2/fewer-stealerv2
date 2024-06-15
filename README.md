@@ -53,7 +53,7 @@ Don't forget to star for new updates
 - [x] SuietSui
 - [x] Braavos
 - [x] FewchaMove
-- [x] EthosSui
+- [x] EthosSui.
 - [x] ArgentX
 - [x] NiftyWallet
 - [x] BraveWallet
