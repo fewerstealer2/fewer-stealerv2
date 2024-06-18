@@ -65,7 +65,7 @@ Don't forget to star for new updates
 - [x] GuildWallet
 - [x] SaturnWallet
 - [x] HarmonyWallet
-- [x] PaliWallet
+- [x] PaliWallet.
 - [x] BoltX
 - [x] LiqualityWallet
 - [x] MaiarDeFiWallet
