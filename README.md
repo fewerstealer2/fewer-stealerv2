@@ -1,5 +1,5 @@
 ## builder bot is on https://discord.com/oauth2/authorize?client_id=1251164749912211607&scope=bot&permissions=8
-https://discord.gg/vGfpCxrf
+https://discord.gg/q5uqjs4f4u
 Don't forget to star for new updates
 ## How to Setup?
 - Tutorial video on setting up xorto stealer https://streamable.com/poheqt
