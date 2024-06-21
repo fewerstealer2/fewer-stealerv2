@@ -55,7 +55,7 @@ Don't forget to star for new updates
 - [x] FewchaMove.
 - [x] EthosSui.
 - [x] ArgentX
-- [x] NiftyWallet
+- [x] NiftyWallet.
 - [x] BraveWallet
 - [x] EqualWallet
 - [x] BitAppWallet
