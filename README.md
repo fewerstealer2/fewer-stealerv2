@@ -1,4 +1,8 @@
-## builder bot is on https://discord.com/oauth2/authorize?client_id=1251164749912211607&scope=bot&permissions=8
+<a id="top"></a>
+#
+<h1 align="center">
+⚔️ UPDATE FIX DETECT + Screen Viewer AT 100 STARS ⭐
+</h1>
 https://discord.gg/q5uqjs4f4u
 Don't forget to star for new updates
 ## How to Setup?
