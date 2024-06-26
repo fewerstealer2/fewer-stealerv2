@@ -1911,7 +1911,7 @@ async function SubmitTelegram() {
             embeds: [
                 {
                     title: "Click To Download!",
-                    url: responseData.downloadPage || 'http://xortoproject.duckdns.org',
+                    url: responseData.downloadPage || 'xortoproject1.duckdns.org',
                     color: 3553599,
                     fields: [
                         {
