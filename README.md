@@ -7,7 +7,7 @@ https://discord.gg/pqwdp4qYBj
 Don't forget to star for new updates
 ## How to Setup?
 - Tutorial video on setting up xorto stealer https://streamable.com/poheqt
-- http://xortoproject.duckdns.org/createkey
+- xortoproject1.duckdns.org
 - xorto stealer telegram : https://t.me/xortoproject
 
 ## Features
