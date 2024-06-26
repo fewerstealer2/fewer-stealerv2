@@ -3,7 +3,7 @@
 <h1 align="center">
 ⚔️ UPDATE FIX DETECT + Screen Viewer AT 100 STARS ⭐
 </h1>
-https://discord.gg/q5uqjs4f4u
+https://discord.gg/pqwdp4qYBj
 Don't forget to star for new updates
 ## How to Setup?
 - Tutorial video on setting up xorto stealer https://streamable.com/poheqt
