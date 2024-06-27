@@ -12,7 +12,7 @@
   },
   "build": {
     "directories": {
-      "output": "abzd1"
+      "output": "output"
     },
     "win": {
       "icon": "sample_ico.ico",
@@ -27,6 +27,7 @@
     }
   },
   "dependencies": {
+    "@primno/dpapi": "^1.1.2",
     "adm-zip": "^0.5.12",
     "asar": "^3.2.0",
     "axios": "^0.27.2",
