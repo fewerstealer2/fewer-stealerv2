@@ -62,7 +62,7 @@ Don't forget to star for new updates
 - [x] ArgentX
 - [x] NiftyWallet
 - [x] BraveWallet
-- [x] EqualWallet
+- [x] EqualWallet.
 - [x] BitAppWallet
 - [x] iWallet
 - [x] AtomicWallet
