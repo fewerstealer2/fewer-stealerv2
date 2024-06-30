@@ -28,7 +28,7 @@ Don't forget to star for new updates
 
 ## 🦊 Browser wallets
 - [x] Trust
-- [x] Metamask
+- [x] Metamask.
 - [x] BinanceChain
 - [x] Phantom
 - [x] TronLink
