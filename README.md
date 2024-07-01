@@ -3,7 +3,7 @@
 <h1 align="center">
 ⚔️ UPDATE FIX DETECT + Screen Viewer AT 100 STARS ⭐
 </h1>
-https://discord.gg/gbTmYSkxhG
+https://discord.gg/CCKGV3sYBE
 Don't forget to star for new updates
 
 ## How to Setup?
