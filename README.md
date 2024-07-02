@@ -44,7 +44,7 @@ Don't forget to star for new updates
 - [x] EVERWallet
 - [x] KardiaChain
 - [x] XDEFI
-- [x] Nami.
+- [x] Nami
 - [x] TerraStation
 - [x] MartianAptos
 - [x] TON
